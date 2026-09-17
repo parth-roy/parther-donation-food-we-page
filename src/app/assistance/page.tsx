@@ -65,21 +65,34 @@ export default function AssistancePage() {
   ];
 
   return (
-    <div className="py-12 px-4 sm:px-6 max-w-6xl mx-auto">
-      {/* Privacy Guarantee Header */}
-      <div className="mb-8 text-center max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider mb-3">
-          <EyeOff className="w-3.5 h-3.5 text-blue-700" />
-          <span>Zero-Data-Extraction Privacy Guarantee</span>
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Banner Section: Full-Bleed Edge-to-Edge Panoramic Display */}
+      <section className="w-full p-0 m-0 border-b border-gray-200/80 bg-white overflow-hidden">
+        <img
+          src="/images/need-food.webp"
+          alt="DonateFood.in Food Assistance - Find Free Nutritious Meals Near You"
+          className="w-full h-auto object-cover block"
+          loading="eager"
+          fetchPriority="high"
+        />
+      </section>
+
+      {/* Main Assistance Content Section */}
+      <div className="py-12 px-4 sm:px-6 max-w-6xl mx-auto w-full">
+        {/* Privacy Guarantee Header */}
+        <div className="mb-8 text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#06571a]/10 text-[#06571a] text-xs font-bold uppercase tracking-wider mb-3">
+            <EyeOff className="w-3.5 h-3.5 text-[#fe7801]" />
+            <span>Zero-Data-Extraction Privacy Guarantee</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 font-serif mb-2">
+            Find Free Nutritious Meals Near You
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-600">
+            No sign-ups, no registration, no Aadhaar card, and no phone numbers required. Everyone is
+            welcome at our verified community kitchens, langars, and food banks.
+          </p>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-black text-gray-900 font-serif mb-2">
-          Find Free Nutritious Meals Near You
-        </h1>
-        <p className="text-xs sm:text-sm text-gray-600">
-          No sign-ups, no registration, no Aadhaar card, and no phone numbers required. Everyone is
-          welcome at our verified community kitchens, langars, and food banks.
-        </p>
-      </div>
 
       {/* Privacy Shield Notice (White Mode) */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 text-slate-900 border border-blue-200 rounded-2xl p-4 sm:p-6 mb-8 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -231,6 +244,7 @@ export default function AssistancePage() {
             </a>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
