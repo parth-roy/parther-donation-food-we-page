@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { INDIAN_STATES } from "@/data/geography";
-import { Shield, FileText, CheckCircle2, Globe, Heart, Award } from "lucide-react";
+import { Shield, FileText, CheckCircle2, Globe, Heart, Award, MapPin, Building2, ChevronRight } from "lucide-react";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 
 export function Footer() {
@@ -127,6 +126,14 @@ export function Footer() {
                   Donate in Indiranagar (Bengaluru)
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/locations"
+                  className="inline-flex items-center gap-1 font-bold text-[#06571a] hover:underline pt-1"
+                >
+                  <span>See All 200+ Locations →</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -178,6 +185,14 @@ export function Footer() {
                   NDMA Disaster Food Support
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/locations"
+                  className="inline-flex items-center gap-1 font-bold text-[#fe7801] hover:underline pt-1"
+                >
+                  <span>Browse All Relief Cities →</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -222,6 +237,35 @@ export function Footer() {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* Nationwide Hyperlocal Locations Access Banner */}
+        <div className="bg-gradient-to-r from-[#06571a] via-[#096e23] to-[#fe7801] rounded-3xl p-6 sm:p-7 mb-12 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4 text-center sm:text-left">
+            <div className="w-13 h-13 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center shrink-0 border border-white/20 shadow-inner">
+              <MapPin className="w-7 h-7 text-white" />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-emerald-100 bg-white/15 px-3 py-1 rounded-full mb-1.5 backdrop-blur-xs border border-white/20">
+                <span className="w-2 h-2 rounded-full bg-[#fe7801] animate-pulse"></span>
+                <span>Hyperlocal Administrative Network</span>
+              </div>
+              <h4 className="text-xl sm:text-2xl font-black tracking-tight text-white font-serif">
+                Explore Food Rescue Coverage Across India
+              </h4>
+              <p className="text-xs sm:text-sm text-emerald-100 max-w-2xl mt-0.5">
+                Search and access dedicated municipal food donation hubs, free community relief kitchens, and NITI Aayog verified NGOs across 200+ cities in 28 states and 8 union territories.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/locations"
+            className="inline-flex items-center gap-2.5 bg-white hover:bg-emerald-50 text-[#06571a] hover:text-[#044013] font-black text-sm px-7 py-3.5 rounded-2xl shadow-xl transition-all shrink-0 hover:scale-105 active:scale-95"
+          >
+            <Building2 className="w-4 h-4 text-[#fe7801]" />
+            <span>See All Locations &amp; Cities</span>
+            <ChevronRight className="w-4 h-4 text-[#06571a]" />
+          </Link>
         </div>
 
         {/* Bottom copyright */}

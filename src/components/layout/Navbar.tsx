@@ -191,11 +191,11 @@ export function Navbar() {
             {/* Sleek Floating Glass Dropdown Popover */}
             {langDropdownOpen && (
               <div
-                className="absolute right-0 mt-3 w-64 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-black/10 border border-gray-100 p-2.5 z-50 animate-in fade-in zoom-in-95 duration-200"
+                className="absolute right-0 mt-3 w-72 max-h-[420px] overflow-y-auto bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl shadow-black/15 border border-gray-100 p-2.5 z-50 animate-in fade-in zoom-in-95 duration-200"
                 onMouseLeave={() => setLangDropdownOpen(false)}
               >
-                <div className="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-gray-400 border-b border-gray-100/80 mb-1.5 flex items-center justify-between">
-                  <span>Select Language / भाषा</span>
+                <div className="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-gray-400 border-b border-gray-100/80 mb-1.5 flex items-center justify-between sticky top-0 bg-white/90 backdrop-blur-xs z-10">
+                  <span>Select Language (12 Languages)</span>
                   <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#06571a] to-[#fe7801]" />
                 </div>
                 <div className="grid grid-cols-1 gap-1">

@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import { INDIAN_STATES, getAllCities } from "@/data/geography";
+import { INDIAN_STATES, getAllCities, CityLocation } from "@/data/geography";
+import { TIER_A_B_CITIES_REGISTRY } from "@/utils/dynamicLocation";
+import { VERIFIED_NGOS } from "@/data/ngos";
 import { FSSAI_SURPLUS_REGULATIONS } from "@/data/compliance";
 import { formatNumber } from "@/utils/format";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { NearestFoodBankLocator } from "@/components/geo/NearestFoodBankLocator";
 import {
   HeartHandshake,
   Utensils,
@@ -32,6 +35,20 @@ export default function HomePage() {
 
   const selectedState = INDIAN_STATES.find((s) => s.slug === selectedStateSlug) || INDIAN_STATES[0];
   const allCities = getAllCities();
+
+  const stateCities = useMemo(() => {
+    const staticCities = selectedState.districts.flatMap((d) => d.cities);
+    const registryCities = TIER_A_B_CITIES_REGISTRY.filter((c) => c.stateSlug === selectedState.slug);
+    const seen = new Set<string>();
+    const combined: CityLocation[] = [];
+    for (const c of [...staticCities, ...registryCities]) {
+      if (!seen.has(c.slug)) {
+        seen.add(c.slug);
+        combined.push(c);
+      }
+    }
+    return combined;
+  }, [selectedState]);
 
   const faqs = [
     {
@@ -332,6 +349,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Real-time Proximity Food Bank Geo-Locator */}
+      <section className="py-12 px-4 sm:px-6 max-w-7xl mx-auto w-full">
+        <NearestFoodBankLocator />
+      </section>
+
       {/* Programmatic SEO Showcase: Hyperlocal Geographic Directory */}
       <section className="py-16 bg-slate-100 border-y border-slate-200 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
@@ -368,70 +390,108 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* State Level Aggregator Hub Navigation Bar */}
+          <div className="flex flex-wrap items-center justify-between bg-white p-4 sm:p-5 rounded-2xl border border-gray-200/80 mb-6 gap-3 shadow-xs">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#06571a] animate-pulse"></span>
+              <span className="text-xs sm:text-sm font-bold text-gray-900">
+                Viewing <span className="text-[#06571a] font-black">{selectedState.name}</span> Regional Network ({stateCities.length} Core Municipal Hubs)
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs font-bold">
+              <Link
+                href={`/donate-food/${selectedState.slug}`}
+                className="text-[#06571a] hover:text-[#044013] hover:underline flex items-center gap-1 bg-[#06571a]/5 px-2.5 py-1 rounded-lg transition-colors"
+              >
+                <span>State Donor Hub</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href={`/assistance/${selectedState.slug}`}
+                className="text-[#fe7801] hover:text-[#e06900] hover:underline flex items-center gap-1 bg-[#fe7801]/5 px-2.5 py-1 rounded-lg transition-colors"
+              >
+                <span>State Assistance Hub</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href={`/ngo-directory/${selectedState.slug}`}
+                className="text-slate-700 hover:text-slate-900 hover:underline flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg transition-colors"
+              >
+                <span>State NGO Directory</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+
           {/* Cities Grid for Selected State */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {selectedState.districts.flatMap((district) =>
-              district.cities.map((city) => (
-                <div
-                  key={city.slug}
-                  className="bg-white rounded-xl p-5 border border-gray-200/80 shadow-xs hover:shadow-md hover:border-[#06571a]/40 transition-all flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold text-gray-400 font-mono">
-                        {district.name} • {city.pincode}
-                      </span>
-                      <span className="bg-[#06571a]/10 text-[#06571a] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#06571a]/20">
-                        {city.disasterZoneTier}
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{city.name}</h3>
-                    <p className="text-xs text-gray-500 mb-3">
-                      Serving {city.populationCovered} residents across major surplus corridors.
-                    </p>
-
-                    <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-2.5 rounded-lg border border-slate-100 mb-4">
-                      <div>
-                        <span className="text-gray-400 block text-[10px]">Verified NGOs:</span>
-                        <span className="font-bold text-gray-800">{city.activeNgosCount} hubs</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-400 block text-[10px]">Monthly Meals:</span>
-                        <span className="font-bold text-[#06571a]">
-                          {formatNumber(city.mealsDistributedMonth)}
-                        </span>
-                      </div>
-                    </div>
+            {stateCities.map((city) => (
+              <div
+                key={city.slug}
+                className="bg-white rounded-xl p-5 border border-gray-200/80 shadow-xs hover:shadow-md hover:border-[#06571a]/40 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold text-gray-400 font-mono">
+                      {city.districtName} • {city.pincode}
+                    </span>
+                    <span className="bg-[#06571a]/10 text-[#06571a] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#06571a]/20">
+                      {city.disasterZoneTier}
+                    </span>
                   </div>
 
-                  {/* 3 Silo Links for this City */}
-                  <div className="space-y-1.5 text-xs pt-3 border-t border-gray-100">
-                    <Link
-                      href={`/donate-food/${city.stateSlug}/${city.districtSlug}/${city.slug}`}
-                      className="flex items-center justify-between text-[#06571a] hover:text-[#044013] font-medium py-1 px-1.5 rounded hover:bg-[#06571a]/5 transition-colors"
-                    >
-                      <span>Donate Food in {city.name}</span>
-                      <ChevronRight className="w-3.5 h-3.5 text-[#06571a]" />
-                    </Link>
-                    <Link
-                      href={`/assistance/${city.stateSlug}/${city.districtSlug}/${city.slug}`}
-                      className="flex items-center justify-between text-[#fe7801] hover:text-[#e06900] font-medium py-1 px-1.5 rounded hover:bg-[#fe7801]/5 transition-colors"
-                    >
-                      <span>Find Free Food in {city.name}</span>
-                      <ChevronRight className="w-3.5 h-3.5 text-[#fe7801]" />
-                    </Link>
-                    <Link
-                      href={`/ngo-directory/${city.stateSlug}/${city.slug}`}
-                      className="flex items-center justify-between text-slate-700 hover:text-[#06571a] font-medium py-1 px-1.5 rounded hover:bg-slate-50 transition-colors"
-                    >
-                      <span>Verified NGOs in {city.name}</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </Link>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">{city.name}</h3>
+                  <p className="text-xs text-gray-500 mb-3">
+                    Serving {city.populationCovered} residents across major surplus corridors.
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-2.5 rounded-lg border border-slate-100 mb-4">
+                    <div>
+                      <span className="text-gray-400 block text-[10px]">Verified NGOs:</span>
+                      <span className="font-bold text-gray-800">{city.activeNgosCount} hubs</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-400 block text-[10px]">Monthly Meals:</span>
+                      <span className="font-bold text-[#06571a]">
+                        {formatNumber(city.mealsDistributedMonth)}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              ))
-            )}
+
+                {/* 4 Silo Links for this City */}
+                <div className="space-y-1.5 text-xs pt-3 border-t border-gray-100">
+                  <Link
+                    href={`/donate-food/${city.stateSlug}/${city.districtSlug}/${city.slug}`}
+                    className="flex items-center justify-between text-[#06571a] hover:text-[#044013] font-medium py-1 px-1.5 rounded hover:bg-[#06571a]/5 transition-colors"
+                  >
+                    <span>Donate Food in {city.name}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-[#06571a]" />
+                  </Link>
+                  <Link
+                    href={`/assistance/${city.stateSlug}/${city.districtSlug}/${city.slug}`}
+                    className="flex items-center justify-between text-[#fe7801] hover:text-[#e06900] font-medium py-1 px-1.5 rounded hover:bg-[#fe7801]/5 transition-colors"
+                  >
+                    <span>Find Free Food in {city.name}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-[#fe7801]" />
+                  </Link>
+                  <Link
+                    href={`/ngo-directory/${city.stateSlug}/${city.slug}`}
+                    className="flex items-center justify-between text-slate-700 hover:text-[#06571a] font-medium py-1 px-1.5 rounded hover:bg-slate-50 transition-colors"
+                  >
+                    <span>Verified NGOs in {city.name}</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <Link
+                    href={`/volunteer/${city.stateSlug}/${city.slug}`}
+                    className="flex items-center justify-between text-teal-700 hover:text-teal-800 font-medium py-1 px-1.5 rounded hover:bg-teal-50/60 transition-colors"
+                  >
+                    <span>Volunteer Fleet in {city.name}</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

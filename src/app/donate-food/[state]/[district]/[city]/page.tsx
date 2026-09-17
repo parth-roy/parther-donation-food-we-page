@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getCityBySlug, getAllCities } from "@/data/geography";
-import { getNgosByCity } from "@/data/ngos";
+import { resolveCityLocation, getTopSeedCities } from "@/utils/dynamicLocation";
+import { getDynamicNgosForCity } from "@/utils/dynamicNgos";
 import { FSSAI_SURPLUS_REGULATIONS } from "@/data/compliance";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { formatNumber } from "@/utils/format";
@@ -20,6 +19,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+export const dynamicParams = true;
+
 interface PageProps {
   params: Promise<{
     state: string;
@@ -29,8 +30,8 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const cities = getAllCities();
-  return cities.map((city) => ({
+  const seedCities = getTopSeedCities();
+  return seedCities.map((city) => ({
     state: city.stateSlug,
     district: city.districtSlug,
     city: city.slug,
@@ -39,8 +40,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { state, district, city: citySlug } = await params;
-  const city = getCityBySlug(state, district, citySlug);
-  if (!city) return { title: "Location Not Found" };
+  const city = resolveCityLocation(state, district, citySlug);
 
   return {
     title: `Donate Food in ${city.name}, ${city.districtName} | Verified Rescue Network`,
@@ -58,13 +58,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function CityDonationPage({ params }: PageProps) {
   const { state, district, city: citySlug } = await params;
-  const city = getCityBySlug(state, district, citySlug);
-
-  if (!city) {
-    notFound();
-  }
-
-  const localNgos = getNgosByCity(city.slug);
+  const city = resolveCityLocation(state, district, citySlug);
+  const localNgos = getDynamicNgosForCity(city);
 
   return (
     <div className="py-12 px-4 sm:px-6 max-w-6xl mx-auto">

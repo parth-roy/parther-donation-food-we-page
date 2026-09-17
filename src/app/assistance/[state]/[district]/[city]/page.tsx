@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getCityBySlug, getAllCities } from "@/data/geography";
+import { resolveCityLocation, getTopSeedCities } from "@/utils/dynamicLocation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   MapPin,
@@ -16,6 +15,8 @@ import {
   Building,
 } from "lucide-react";
 
+export const dynamicParams = true;
+
 interface PageProps {
   params: Promise<{
     state: string;
@@ -25,8 +26,8 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const cities = getAllCities();
-  return cities.map((city) => ({
+  const seedCities = getTopSeedCities();
+  return seedCities.map((city) => ({
     state: city.stateSlug,
     district: city.districtSlug,
     city: city.slug,
@@ -35,8 +36,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { state, district, city: citySlug } = await params;
-  const city = getCityBySlug(state, district, citySlug);
-  if (!city) return { title: "Location Not Found" };
+  const city = resolveCityLocation(state, district, citySlug);
 
   return {
     title: `Free Food & Community Kitchens in ${city.name} | DonateFood.in`,
@@ -44,16 +44,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: `https://donatefood.in/assistance/${state}/${district}/${citySlug}`,
     },
+    openGraph: {
+      title: `Free Meal Centers in ${city.name} (${city.stateName})`,
+      description: `Locate active community kitchens, langars, and hunger relief distribution points across ${city.name}.`,
+      url: `https://donatefood.in/assistance/${state}/${district}/${citySlug}`,
+    },
   };
 }
 
 export default async function CityAssistancePage({ params }: PageProps) {
   const { state, district, city: citySlug } = await params;
-  const city = getCityBySlug(state, district, citySlug);
-
-  if (!city) {
-    notFound();
-  }
+  const city = resolveCityLocation(state, district, citySlug);
 
   const localKitchens = [
     {

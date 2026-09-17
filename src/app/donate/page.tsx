@@ -5,6 +5,8 @@ import confetti from "canvas-confetti";
 import { FSSAI_SURPLUS_REGULATIONS, generateVerificationHash, DigitalHandoverCertificate } from "@/data/compliance";
 import { VERIFIED_NGOS } from "@/data/ngos";
 import { getAllCities } from "@/data/geography";
+import { GoodSamaritanShield } from "@/components/compliance/GoodSamaritanShield";
+import { NearestFoodBankLocator } from "@/components/geo/NearestFoodBankLocator";
 import {
   Utensils,
   ShieldCheck,
@@ -112,6 +114,11 @@ export default function DonateFoodPage() {
             Capture vital operational data, enforce cold-chain safety limits, and generate an immutable
             Good Samaritan liability mitigation certificate.
           </p>
+        </div>
+
+        {/* Statutory Immunity & Legal Protection Shield */}
+        <div className="mb-8">
+          <GoodSamaritanShield />
         </div>
 
       {!submittedCertificate ? (
@@ -480,6 +487,11 @@ export default function DonateFoodPage() {
           </div>
         </div>
       )}
+
+        {/* Real-time Proximity Food Bank Geo-Locator */}
+        <div className="mt-12">
+          <NearestFoodBankLocator />
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getAllCities, INDIAN_STATES } from "@/data/geography";
-import { VERIFIED_NGOS } from "@/data/ngos";
+import { resolveCityLocation, getTopSeedCities } from "@/utils/dynamicLocation";
+import { getDynamicNgosForCity } from "@/utils/dynamicNgos";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { formatNumber } from "@/utils/format";
 import {
@@ -19,6 +18,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+export const dynamicParams = true;
+
 interface PageProps {
   params: Promise<{
     state: string;
@@ -27,8 +28,8 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const cities = getAllCities();
-  return cities.map((city) => ({
+  const seedCities = getTopSeedCities();
+  return seedCities.map((city) => ({
     state: city.stateSlug,
     city: city.slug,
   }));
@@ -36,9 +37,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { state, city: citySlug } = await params;
-  const cities = getAllCities();
-  const city = cities.find((c) => c.stateSlug === state && c.slug === citySlug);
-  if (!city) return { title: "Directory Not Found" };
+  const city = resolveCityLocation(state, "central", citySlug);
 
   return {
     title: `Verified NGOs in ${city.name}, ${city.stateName} | NITI Aayog DARPAN Verified`,
@@ -46,19 +45,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: `https://donatefood.in/ngo-directory/${state}/${citySlug}`,
     },
+    openGraph: {
+      title: `Verified Food Rescue NGOs in ${city.name} (${city.stateName})`,
+      description: `Browse NITI Aayog DARPAN and FSSAI certified food rescue partners in ${city.name}.`,
+      url: `https://donatefood.in/ngo-directory/${state}/${citySlug}`,
+    },
   };
 }
 
 export default async function NgoDirectoryPage({ params }: PageProps) {
   const { state, city: citySlug } = await params;
-  const cities = getAllCities();
-  const city = cities.find((c) => c.stateSlug === state && c.slug === citySlug);
-
-  if (!city) {
-    notFound();
-  }
-
-  const ngos = VERIFIED_NGOS.filter((n) => n.citySlug === city.slug);
+  const city = resolveCityLocation(state, "central", citySlug);
+  const ngos = getDynamicNgosForCity(city);
 
   return (
     <div className="py-12 px-4 sm:px-6 max-w-6xl mx-auto">
@@ -179,13 +177,22 @@ export default async function NgoDirectoryPage({ params }: PageProps) {
                 </a>
               </div>
 
-              <Link
-                href="/donate"
-                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg text-xs flex items-center gap-1.5 transition-all"
-              >
-                <span>Route Food to This Partner</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link
+                  href={`/ngo/${ngo.stateSlug}/${ngo.citySlug}/${ngo.slug}`}
+                  className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 font-bold rounded-lg text-xs flex items-center gap-1.5 transition-all"
+                >
+                  <Award className="w-3.5 h-3.5 text-purple-600" />
+                  <span>Audit & Profile</span>
+                </Link>
+                <Link
+                  href="/donate"
+                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg text-xs flex items-center gap-1.5 transition-all"
+                >
+                  <span>Route Food</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
           </div>
         ))}
