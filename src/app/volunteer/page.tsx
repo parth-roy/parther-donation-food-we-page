@@ -59,21 +59,34 @@ export default function VolunteerPage() {
   };
 
   return (
-    <div className="py-12 px-4 sm:px-6 max-w-5xl mx-auto">
-      {/* Header */}
-      <div className="mb-8 text-center max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 text-teal-800 text-xs font-bold uppercase tracking-wider mb-3">
-          <Users className="w-3.5 h-3.5 text-teal-600" />
-          <span>Citizen Logistics Network</span>
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Banner Section: Full-Bleed Edge-to-Edge Panoramic Display */}
+      <section className="w-full p-0 m-0 border-b border-gray-200/80 bg-white overflow-hidden">
+        <img
+          src="/images/volunteer.webp"
+          alt="DonateFood.in Volunteer Network - Join the Food Rescue Fleet"
+          className="w-full h-auto object-cover block"
+          loading="eager"
+          fetchPriority="high"
+        />
+      </section>
+
+      {/* Main Volunteer Content Section */}
+      <div className="py-12 px-4 sm:px-6 max-w-5xl mx-auto w-full">
+        {/* Header */}
+        <div className="mb-8 text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#06571a]/10 text-[#06571a] text-xs font-bold uppercase tracking-wider mb-3">
+            <Users className="w-3.5 h-3.5 text-[#fe7801]" />
+            <span>Citizen Logistics Network</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 font-serif mb-2">
+            Join the Volunteer Food Rescue Fleet
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-600">
+            Transform grassroots volunteerism into an algorithmically coordinated rescue force. Help
+            transport surplus food during critical time windows before spoilage occurs.
+          </p>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-black text-gray-900 font-serif mb-2">
-          Join the Volunteer Food Rescue Fleet
-        </h1>
-        <p className="text-xs sm:text-sm text-gray-600">
-          Transform grassroots volunteerism into an algorithmically coordinated rescue force. Help
-          transport surplus food during critical time windows before spoilage occurs.
-        </p>
-      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left 2 Cols: Registration or Volunteer Dashboard */}
@@ -259,6 +272,7 @@ export default function VolunteerPage() {
             </p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
