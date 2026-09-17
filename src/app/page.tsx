@@ -197,126 +197,136 @@ export default function HomePage() {
           {/* Card 1: I Have Food */}
           <Link
             href="/donate"
-            className="group relative bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#06571a] transition-all flex flex-col justify-between"
+            className="group relative bg-white rounded-3xl p-7 border border-gray-200/90 shadow-sm hover:shadow-xl hover:border-[#06571a] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
           >
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#06571a]/10 text-[#06571a] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Utensils className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold text-[#06571a] uppercase tracking-wider font-mono">
+              <span className="text-xs font-black text-[#06571a] uppercase tracking-wider font-sans">
                 Donor Workflow
               </span>
-              <h3 className="text-xl font-bold text-gray-900 mt-1 mb-2">I Have Food</h3>
-              <p className="text-xs text-gray-600 leading-relaxed mb-4">
+              <h3 className="text-2xl sm:text-[26px] font-black tracking-tight text-slate-950 mt-1.5 mb-2.5">
+                I Have Food
+              </h3>
+              <p className="text-sm sm:text-[15px] font-semibold text-slate-800 leading-relaxed mb-6">
                 Donate surplus cooked or raw food from weddings, banquets, cafeterias, and restaurants.
                 Includes automated FSSAI temperature verification (&lt;7°C) and digital compliance certificate.
               </p>
             </div>
-            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#06571a]">
+            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-sm font-black text-[#06571a] tracking-wide">
               <span>Initiate Food Dispatch</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </Link>
 
           {/* Card 2: I Need Food */}
           <Link
             href="/assistance"
-            className="group relative bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#fe7801] transition-all flex flex-col justify-between"
+            className="group relative bg-white rounded-3xl p-7 border border-gray-200/90 shadow-sm hover:shadow-xl hover:border-[#fe7801] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
           >
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#fe7801]/10 text-[#fe7801] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <MapPin className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold text-[#fe7801] uppercase tracking-wider font-mono">
+              <span className="text-xs font-black text-[#fe7801] uppercase tracking-wider font-sans">
                 Beneficiary Workflow
               </span>
-              <h3 className="text-xl font-bold text-gray-900 mt-1 mb-2">I Need Food</h3>
-              <p className="text-xs text-gray-600 leading-relaxed mb-4">
+              <h3 className="text-2xl sm:text-[26px] font-black tracking-tight text-slate-950 mt-1.5 mb-2.5">
+                I Need Food
+              </h3>
+              <p className="text-sm sm:text-[15px] font-semibold text-slate-800 leading-relaxed mb-6">
                 Privacy-first assistance. No phone numbers, personal identities, or tracking required. Find
                 active community kitchens, langars, food banks, and daily meal points near you.
               </p>
             </div>
-            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#fe7801]">
+            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-sm font-black text-[#fe7801] tracking-wide">
               <span>Find Free Sustenance</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </Link>
 
           {/* Card 3: I Want To Help */}
           <Link
             href="/volunteer"
-            className="group relative bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#06571a] transition-all flex flex-col justify-between"
+            className="group relative bg-white rounded-3xl p-7 border border-gray-200/90 shadow-sm hover:shadow-xl hover:border-[#06571a] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
           >
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#06571a]/10 text-[#06571a] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Users className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold text-[#06571a] uppercase tracking-wider font-mono">
+              <span className="text-xs font-black text-[#06571a] uppercase tracking-wider font-sans">
                 Citizen Logistics
               </span>
-              <h3 className="text-xl font-bold text-gray-900 mt-1 mb-2">I Want To Help</h3>
-              <p className="text-xs text-gray-600 leading-relaxed mb-4">
+              <h3 className="text-2xl sm:text-[26px] font-black tracking-tight text-slate-950 mt-1.5 mb-2.5">
+                I Want To Help
+              </h3>
+              <p className="text-sm sm:text-[15px] font-semibold text-slate-800 leading-relaxed mb-6">
                 Join India's largest volunteer rescue network. Help pick up cooked meals with short time
                 windows and deliver them to designated community hubs and shelters.
               </p>
             </div>
-            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#06571a]">
+            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-sm font-black text-[#06571a] tracking-wide">
               <span>Register as Volunteer</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </Link>
 
           {/* Card 4: I'm An NGO */}
           <Link
             href="/ngo"
-            className="group relative bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#fe7801] transition-all flex flex-col justify-between"
+            className="group relative bg-white rounded-3xl p-7 border border-gray-200/90 shadow-sm hover:shadow-xl hover:border-[#fe7801] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
           >
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#fe7801]/10 text-[#fe7801] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold text-[#fe7801] uppercase tracking-wider font-mono">
+              <span className="text-xs font-black text-[#fe7801] uppercase tracking-wider font-sans">
                 Partner Matrix
               </span>
-              <h3 className="text-xl font-bold text-gray-900 mt-1 mb-2">I'm An NGO</h3>
-              <p className="text-xs text-gray-600 leading-relaxed mb-4">
+              <h3 className="text-2xl sm:text-[26px] font-black tracking-tight text-slate-950 mt-1.5 mb-2.5">
+                I'm An NGO
+              </h3>
+              <p className="text-sm sm:text-[15px] font-semibold text-slate-800 leading-relaxed mb-6">
                 Multi-tiered verification backed by NITI Aayog DARPAN. Claim your profile, verify 12A/80G
                 and FSSAI credentials, and receive high-volume corporate and banquet pickups.
               </p>
             </div>
-            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#fe7801]">
+            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-sm font-black text-[#fe7801] tracking-wide">
               <span>Verify DARPAN Credentials</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </Link>
 
           {/* Card 5: Emergency Mode */}
           <Link
             href="/emergency"
-            className="group relative bg-gradient-to-br from-[#fff7ed] via-white to-[#fff7ed] rounded-2xl p-6 border border-[#fed7aa] shadow-sm hover:shadow-md hover:border-[#fe7801] transition-all flex flex-col justify-between md:col-span-2 lg:col-span-2"
+            className="group relative bg-gradient-to-br from-[#fff7ed] via-white to-[#fff7ed] rounded-3xl p-7 border border-[#fed7aa] shadow-sm hover:shadow-xl hover:border-[#fe7801] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between md:col-span-2 lg:col-span-2"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-12 h-12 rounded-xl bg-[#fe7801] text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-md shadow-[#fe7801]/30">
                   <AlertTriangle className="w-6 h-6" />
                 </div>
-                <span className="bg-[#fe7801]/15 text-[#fe7801] text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase border border-[#fed7aa]">
+                <span className="bg-[#fe7801]/15 text-[#fe7801] text-xs font-black px-3 py-1 rounded-full uppercase border border-[#fed7aa] tracking-wider">
                   NDMA / NDRF Protocol
                 </span>
               </div>
-              <span className="text-xs font-bold text-[#fe7801] uppercase tracking-wider font-mono">
+              <span className="text-xs font-black text-[#fe7801] uppercase tracking-wider font-sans">
                 Crisis Command System
               </span>
-              <h3 className="text-xl font-bold text-slate-950 mt-1 mb-2">Disaster Emergency Mode</h3>
-              <p className="text-xs text-gray-700 leading-relaxed mb-4">
+              <h3 className="text-2xl sm:text-[28px] font-black tracking-tight text-slate-950 mt-1.5 mb-2.5">
+                Disaster Emergency Mode
+              </h3>
+              <p className="text-sm sm:text-[15px] font-semibold text-slate-800 leading-relaxed mb-6">
                 Overrides the standard interface to establish a centralized logistics command center during
                 floods, cyclones, or heatwaves. Integrates live NDMA alerts, heavy transport vehicle
                 capacities, relief camps, and potable water supplies.
               </p>
             </div>
-            <div className="pt-4 border-t border-[#fed7aa] flex items-center justify-between text-xs font-bold text-[#fe7801]">
+            <div className="pt-4 border-t border-[#fed7aa] flex items-center justify-between text-sm font-black text-[#fe7801] tracking-wide">
               <span>Launch Emergency Command Center</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </Link>
         </div>
