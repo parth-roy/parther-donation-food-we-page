@@ -21,7 +21,6 @@ import {
   ChevronRight,
   Building,
   Truck,
-  Sparkles,
   HelpCircle,
 } from "lucide-react";
 
@@ -72,11 +71,6 @@ export default function HomePage() {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#06571a]/10 border border-[#06571a]/20 text-[#06571a] text-xs font-bold uppercase tracking-wider mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-[#fe7801]" />
-              <span>Digital Public Infrastructure for India</span>
-            </div>
-
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight font-serif leading-[1.15] mb-6 text-slate-950">
               Turning Surplus Food into{" "}
               <span className="text-[#06571a]">
