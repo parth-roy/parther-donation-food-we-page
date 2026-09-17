@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DonateFood.in — Parther Donation Food Web Platform
 
-## Getting Started
+A production-grade, hyper-optimized Next.js web application engineered to bridge the gap between food donors (weddings, restaurants, corporate cafeterias, households) and verified local hunger-relief NGOs across India.
 
-First, run the development server:
+---
+
+## 🌟 Key Features
+
+- **Smart Responsive Navigation**: Smooth hide-on-scroll-down, slow animated reveal-on-scroll-up navbar with dynamic glassmorphism and brand-themed underline indicator (55% green `#06571a` fading into 45% orange `#fe7801`).
+- **High-Performance WebP Hero Section**: Full-width high-definition WebP banner with zero background distortion.
+- **Multilingual Support**: Quick modal and interactive language switcher (English, Bengali, Hindi, and more).
+- **Hyper-Localized SEO Routing**: SSG-rendered state, district, and city routes for food donation hubs and NGO directories (e.g. `/donate-food/west-bengal/kolkata/kolkata-central`).
+- **CSR & ESG Integration**: Carbon credit and corporate food waste diversion modules for enterprise partners.
+- **Volunteer & Emergency Relief**: Fast-dispatch interfaces for time-critical excess perishables.
+
+---
+
+## 🚀 Technology Stack
+
+- **Framework**: Next.js 16 (App Router, Turbopack, Standalone Output)
+- **UI & Styling**: React 19, Tailwind CSS v4, Lucide React
+- **Process Manager**: PM2 (Cluster Mode)
+- **Web Server & Reverse Proxy**: Nginx (HTTP/2, TLS 1.3, Gzip, Aggressive Cache Caching)
+- **Infrastructure**: DigitalOcean Droplet (`64.227.173.170`)
+- **DNS & Security**: Cloudflare DNS & Let's Encrypt SSL
+- **CI/CD**: GitHub Actions (SSH automated deployment on push to `main`)
+
+---
+
+## 💻 Local Development
 
 ```bash
+# Clone the repository
+git clone https://github.com/parth-roy/parther-donation-food-we-page.git
+cd parther-donation-food-we-page
+
+# Install dependencies
+npm install
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Production Deployment & Server Architecture
 
-## Learn More
+Full server setup instructions, Nginx virtual host configurations, PM2 process management, and Certbot SSL certificate instructions are documented in:
+👉 **[SERVER_SETUP.md](./SERVER_SETUP.md)**
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### CI/CD Deployment Flow
+Every push to the `main` branch automatically triggers `.github/workflows/deploy.yml`:
+1. Connects securely to the DigitalOcean Droplet (`64.227.173.170`) via SSH.
+2. Pulls the latest code from `origin main`.
+3. Runs `npm install` and `npm run build` (standalone target).
+4. Synchronizes static and public assets.
+5. Performs zero-downtime cluster reload via PM2 (`donatefood-web` on port `3010`).
