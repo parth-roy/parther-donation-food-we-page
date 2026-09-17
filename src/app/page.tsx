@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { INDIAN_STATES, getAllCities } from "@/data/geography";
 import { FSSAI_SURPLUS_REGULATIONS } from "@/data/compliance";
 import { formatNumber } from "@/utils/format";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import {
   HeartHandshake,
   Utensils,
@@ -84,26 +85,49 @@ export default function HomePage() {
               coordination layer to eliminate food waste across 800+ districts.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center justify-center gap-3.5 w-full sm:w-auto">
               <Link
                 href="/donate"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#06571a] hover:bg-[#044013] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 active:scale-95 border border-[#06571a]"
+                className="relative group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#06571a] via-[#086a20] to-[#0a7a28] text-white font-bold text-sm tracking-wide shadow-md shadow-[#06571a]/25 hover:shadow-xl hover:shadow-[#06571a]/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-300 whitespace-nowrap shrink-0 overflow-hidden border border-[#0a7e28]/40"
               >
-                <Utensils className="w-4 h-4 text-[#fe7801]" />
+                {/* Ambient light sweep */}
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
+
+                {/* Circular icon chip with smooth color morph to brand orange */}
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/15 group-hover:bg-[#fe7801] transition-colors duration-300 shadow-2xs">
+                  <Utensils className="w-3.5 h-3.5 text-[#fe7801] group-hover:text-white transition-colors duration-300" />
+                </span>
+
                 <span>{t("haveFood")}</span>
               </Link>
+
               <Link
                 href="/assistance"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white hover:bg-[#fff7ed] text-[#fe7801] font-bold text-sm border border-[#fed7aa] shadow-xs transition-all flex items-center justify-center gap-2 active:scale-95"
+                className="relative group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-white/95 hover:bg-white text-slate-800 hover:text-[#fe7801] font-bold text-sm tracking-wide shadow-sm hover:shadow-xl hover:shadow-black/5 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-300 whitespace-nowrap shrink-0 overflow-hidden border border-gray-200 hover:border-[#fe7801]/40"
               >
-                <MapPin className="w-4 h-4 text-[#fe7801]" />
+                {/* Ambient light sweep */}
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-[#fe7801]/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
+
+                {/* Circular icon chip with smooth color morph to brand orange */}
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-orange-50 group-hover:bg-[#fe7801] transition-colors duration-300 shadow-2xs">
+                  <MapPin className="w-3.5 h-3.5 text-[#fe7801] group-hover:text-white transition-colors duration-300" />
+                </span>
+
                 <span>{t("needFood")}</span>
               </Link>
+
               <Link
                 href="/emergency"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#fff7ed] hover:bg-[#ffedd5] text-[#fe7801] font-bold text-sm border border-[#fed7aa] transition-all flex items-center justify-center gap-2 shadow-xs"
+                className="relative group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#fff7ed] via-[#ffedd5] to-[#fed7aa]/50 hover:from-[#ffedd5] hover:to-[#fed7aa] text-[#c2410c] hover:text-[#9a3412] font-bold text-sm tracking-wide shadow-sm hover:shadow-xl hover:shadow-[#fe7801]/15 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-300 whitespace-nowrap shrink-0 overflow-hidden border border-[#fed7aa] hover:border-[#fe7801]/50"
               >
-                <AlertTriangle className="w-4 h-4 text-[#fe7801]" />
+                {/* Ambient light sweep */}
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
+
+                {/* Circular icon chip with smooth color morph to brand orange */}
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#fe7801]/15 group-hover:bg-[#fe7801] transition-colors duration-300 shadow-2xs">
+                  <AlertTriangle className="w-3.5 h-3.5 text-[#fe7801] group-hover:text-white transition-colors duration-300" />
+                </span>
+
                 <span>Emergency Mode</span>
               </Link>
             </div>
@@ -111,39 +135,47 @@ export default function HomePage() {
 
           {/* Real-time National Ticker / KPI Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            <div className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#06571a]/30 transition-all">
+            <div className="bg-white/95 backdrop-blur-xs p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#06571a]/40 hover:shadow-md transition-all duration-300">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-slate-500 font-medium">Meals Rescued</span>
                 <TrendingUp className="w-4 h-4 text-[#06571a]" />
               </div>
-              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">4,821,450+</div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                <AnimatedCounter target={4821450} suffix="+" />
+              </div>
               <p className="text-[11px] text-[#06571a] mt-1 font-medium">Directly to verified food banks</p>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#fe7801]/30 transition-all">
+            <div className="bg-white/95 backdrop-blur-xs p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#fe7801]/40 hover:shadow-md transition-all duration-300">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-slate-500 font-medium">Verified NGO Partners</span>
                 <ShieldCheck className="w-4 h-4 text-[#fe7801]" />
               </div>
-              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">2,140+</div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                <AnimatedCounter target={2140} suffix="+" />
+              </div>
               <p className="text-[11px] text-[#fe7801] mt-1 font-medium">NITI Aayog DARPAN validated</p>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#06571a]/30 transition-all">
+            <div className="bg-white/95 backdrop-blur-xs p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#06571a]/40 hover:shadow-md transition-all duration-300">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-slate-500 font-medium">Districts Mapped</span>
                 <MapPin className="w-4 h-4 text-[#06571a]" />
               </div>
-              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">800+</div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                <AnimatedCounter target={800} suffix="+" />
+              </div>
               <p className="text-[11px] text-[#06571a] mt-1 font-medium">Local Government Directory standard</p>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#fe7801]/30 transition-all">
+            <div className="bg-white/95 backdrop-blur-xs p-5 rounded-2xl border border-gray-200/80 shadow-xs hover:border-[#fe7801]/40 hover:shadow-md transition-all duration-300">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-slate-500 font-medium">CO₂e Avoided</span>
                 <Leaf className="w-4 h-4 text-[#fe7801]" />
               </div>
-              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">12,050 MT</div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                <AnimatedCounter target={12050} suffix=" MT" />
+              </div>
               <p className="text-[11px] text-[#fe7801] mt-1 font-medium">Verra VM0046 methane offset</p>
             </div>
           </div>
