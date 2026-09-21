@@ -3,6 +3,7 @@ import { getAllCities, INDIAN_STATES } from "@/data/geography";
 import { getAllTierAAndBCities } from "@/utils/dynamicLocation";
 import { VERIFIED_NGOS } from "@/data/ngos";
 import { evaluatePseoGovernance } from "@/utils/governance";
+import { ALL_NFHS5_DISTRICTS } from "@/data/nfhs5Data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://donatefood.in";
@@ -22,12 +23,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/donate`, lastModified: new Date(), changeFrequency: "daily", priority: 0.95 },
     { url: `${baseUrl}/assistance`, lastModified: new Date(), changeFrequency: "hourly", priority: 0.95 },
     { url: `${baseUrl}/volunteer`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/volunteer/dashboard`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: `${baseUrl}/action-hub`, lastModified: new Date(), changeFrequency: "daily", priority: 0.95 },
     { url: `${baseUrl}/ngo`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     { url: `${baseUrl}/emergency`, lastModified: new Date(), changeFrequency: "always", priority: 1.0 },
     { url: `${baseUrl}/logistics`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
     { url: `${baseUrl}/locations`, lastModified: new Date(), changeFrequency: "daily", priority: 0.95 },
     { url: `${baseUrl}/enterprise/csr`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/enterprise/carbon-credits`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
+    { url: `${baseUrl}/enterprise/brsr-calculator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.92 },
+    { url: `${baseUrl}/compliance/fssai-schedule-1`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/reports/state-of-food-waste`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.95 },
   ];
 
   // State Aggregator Hubs
@@ -47,6 +53,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
     return gov.inSitemap;
   });
+
+  // Pillar 2: NFHS-5 Nutrition & Health Hubs
+  const nfhsRoutes: MetadataRoute.Sitemap = ALL_NFHS5_DISTRICTS.map((d) => ({
+    url: `${baseUrl}/data/nutrition/${d.stateSlug}/${d.districtSlug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.91,
+  }));
+
+  // Pillar 3 & G: Event-based donation routes for top cities
+  const eventTypes = ["birthday", "wedding", "anniversary"];
+  const eventDonationRoutes: MetadataRoute.Sitemap = indexableCities.slice(0, 20).flatMap((city) =>
+    eventTypes.map((evt) => ({
+      url: `${baseUrl}/donate/${evt}/in/${city.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.88,
+    }))
+  );
 
   // Silo 1: Donor Intent routes
   const donorRoutes: MetadataRoute.Sitemap = indexableCities.map((city) => ({
@@ -91,6 +116,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...coreRoutes,
     ...stateRoutes,
+    ...nfhsRoutes,
+    ...eventDonationRoutes,
     ...donorRoutes,
     ...assistanceRoutes,
     ...ngoDirectoryRoutes,

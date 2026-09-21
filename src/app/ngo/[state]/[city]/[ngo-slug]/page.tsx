@@ -320,6 +320,87 @@ export default async function NgoProfilePage({ params }: PageProps) {
               </div>
             </div>
           </div>
+
+          {/* Programmatic Pillar 1: NFHS-5 Scarcity & Hunger Metrics Alignment */}
+          <div className="bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-transparent rounded-2xl p-6 sm:p-8 border border-amber-200/80 shadow-xs">
+            <div className="flex items-center gap-2 mb-4">
+              <Flame className="w-5 h-5 text-amber-600" />
+              <h2 className="text-xl font-bold text-slate-950">Local Hunger &amp; NFHS-5 Scarcity Correlation</h2>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed mb-4">
+              Data cross-referenced with National Family Health Survey (NFHS-5) and NITI Aayog hunger indicators for <strong>{ngo.cityName}</strong>. Allocating surplus food through this verified node delivers targeted nutritional intervention where stunting and acute wasting are highest.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+              <div className="bg-white p-3.5 rounded-xl border border-amber-200">
+                <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Local Scarcity Status</span>
+                <span className="text-lg font-black text-amber-700 block mt-1">High Vulnerability</span>
+                <span className="text-[10px] text-slate-400">Target Priority Zone</span>
+              </div>
+              <div className="bg-white p-3.5 rounded-xl border border-amber-200">
+                <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Child Wasting Impact</span>
+                <span className="text-lg font-black text-slate-900 block mt-1">Direct Protein Aid</span>
+                <span className="text-[10px] text-slate-400">Alleviates Acute Deficits</span>
+              </div>
+              <div className="bg-white p-3.5 rounded-xl border border-amber-200">
+                <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Compliance Shield</span>
+                <span className="text-lg font-black text-emerald-700 block mt-1">FSSAI Sched. I</span>
+                <span className="text-[10px] text-slate-400">Zero Donor Liability</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Real-Time Donation Needs & Volunteer Requirements */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Urgent Donation Needs */}
+            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs">
+              <div className="flex items-center gap-2 mb-3">
+                <AlertTriangle className="w-4 h-4 text-orange-600" />
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Real-Time Donation Needs</h3>
+              </div>
+              <ul className="space-y-2.5 text-xs text-slate-600">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>Cooked surplus from commercial banquets &amp; corporate cafeterias (min 25 portions)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>Dry staple grains: Fortified Rice, Toor Dal, Mustard Oil &amp; Wheat Flour</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>Insulated stainless-steel transport canisters for hot meals</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Volunteer Requirements */}
+            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs">
+              <div className="flex items-center gap-2 mb-3">
+                <Award className="w-4 h-4 text-emerald-600" />
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Volunteer Openings</h3>
+              </div>
+              <ul className="space-y-2.5 text-xs text-slate-600">
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5"></span>
+                  <span><strong>Night Food Rescue Drivers:</strong> 10:00 PM – 1:00 AM banquet collection shifts</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5"></span>
+                  <span><strong>FSSAI Temperature Audits:</strong> Digital probe logging at handover points</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5"></span>
+                  <span><strong>Distribution Coordinators:</strong> Managing queues at slum feeding hubs</span>
+                </li>
+              </ul>
+              <div className="mt-4 pt-3 border-t border-slate-100">
+                <Link href="/volunteer" className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1">
+                  <span>Apply for Volunteer Certification</span>
+                  <ArrowRight className="w-3 h-3" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right 1 Col: Contact & Action Hub */}

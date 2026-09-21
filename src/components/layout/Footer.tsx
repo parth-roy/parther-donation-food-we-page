@@ -197,42 +197,50 @@ export function Footer() {
           </div>
 
           {/* Silo 3: Partners & Tech */}
+          {/* Silo 3: Partners, Compliance & Data */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#06571a] mb-3">
-              Partners &amp; Technology
+              Compliance &amp; Data Hubs
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/ngo" className="hover:text-[#06571a] transition-colors text-slate-600">
-                  NITI Aayog NGO Verification
+                <Link href="/action-hub" className="hover:text-[#06571a] transition-colors font-bold text-emerald-800 flex items-center gap-1">
+                  <span>📍 Action Hub (Live Grid)</span>
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/ngo-directory/west-bengal/barrackpore"
-                  className="hover:text-[#06571a] transition-colors text-slate-600"
-                >
-                  NGO Directory (Barrackpore)
+                <Link href="/enterprise/brsr-calculator" className="hover:text-[#06571a] transition-colors text-slate-600">
+                  BRSR Scope 3 Calculator
                 </Link>
               </li>
               <li>
-                <Link href="/volunteer" className="hover:text-[#06571a] transition-colors text-slate-600">
-                  Volunteer Fleet Dispatch
+                <Link href="/compliance/fssai-schedule-1" className="hover:text-[#06571a] transition-colors text-slate-600">
+                  FSSAI Schedule I Checklist
                 </Link>
               </li>
               <li>
-                <Link href="/logistics" className="hover:text-[#06571a] transition-colors text-slate-600">
-                  DVRPTW Dynamic Routing
+                <Link href="/reports/state-of-food-waste" className="hover:text-[#06571a] transition-colors text-slate-600">
+                  State of Food Waste Report
                 </Link>
               </li>
               <li>
-                <Link href="/enterprise/csr" className="hover:text-[#06571a] transition-colors text-slate-600">
-                  Schedule VII CSR SaaS
+                <Link href="/data/nutrition/west-bengal/kolkata" className="hover:text-[#06571a] transition-colors text-slate-600">
+                  NFHS-5 District Dashboards
                 </Link>
               </li>
               <li>
-                <Link href="/enterprise/carbon-credits" className="hover:text-[#06571a] transition-colors text-slate-600">
-                  Verra VM0046 Carbon Offsets
+                <Link href="/volunteer/dashboard" className="hover:text-[#06571a] transition-colors text-slate-600">
+                  Volunteer Certificate Portal
+                </Link>
+              </li>
+              <li>
+                <Link href="/donate/wedding/in/kolkata" className="hover:text-[#06571a] transition-colors text-slate-600">
+                  Wedding Leftover Pickup
+                </Link>
+              </li>
+              <li>
+                <Link href="/donate/birthday/in/kolkata" className="hover:text-[#06571a] transition-colors text-slate-600">
+                  Birthday Meal Sponsorship
                 </Link>
               </li>
             </ul>

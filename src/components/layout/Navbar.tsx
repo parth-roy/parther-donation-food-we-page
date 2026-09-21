@@ -126,11 +126,12 @@ export function Navbar() {
           <BrandLogo size="md" showDpiBadge={false} />
         </Link>
 
-        {/* Desktop Navigation Links: 4 core citizen/NGO pathways with 70% blended gradient underline */}
+        {/* Desktop Navigation Links: 4 core citizen/NGO pathways + Action Hub with 70% blended gradient underline */}
         <nav className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0">
           {[
             { href: "/donate", label: t("haveFood") },
             { href: "/assistance", label: t("needFood") },
+            { href: "/action-hub", label: "Action Hub" },
             { href: "/volunteer", label: t("wantToHelp") },
             { href: "/ngo", label: t("imAnNgo") },
           ].map((item) => {
@@ -282,6 +283,17 @@ export function Navbar() {
             <div>
               <div className="text-sm">{t("needFood")}</div>
               <div className="text-xs text-gray-500 font-normal">{t("needFoodDesc")}</div>
+            </div>
+          </Link>
+          <Link
+            href="/action-hub"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-xl hover:bg-emerald-50 text-emerald-900 font-semibold"
+          >
+            <MapPin className="w-5 h-5 text-emerald-600" />
+            <div>
+              <div className="text-sm">Action Hub (Live Grid)</div>
+              <div className="text-xs text-emerald-700 font-normal">Find nearby recovery nodes &amp; kitchens</div>
             </div>
           </Link>
           <Link
