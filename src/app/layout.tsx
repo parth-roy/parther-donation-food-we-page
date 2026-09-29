@@ -109,6 +109,11 @@ export default function RootLayout({
       style={{ colorScheme: "light" }}
     >
       <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2134930804788733"
+          crossOrigin="anonymous"
+        />
         <JsonLd type="Organization" data={{}} />
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900 font-sans selection:bg-emerald-600 selection:text-white">
